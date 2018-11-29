@@ -10,6 +10,14 @@ USE_NGINX_WORKER_PROCESSES=${NGINX_WORKER_PROCESSES:-1}
 # Modify the number of worker processes in Nginx config
 sed -i "/worker_processes\s/c\worker_processes ${USE_NGINX_WORKER_PROCESSES};" /etc/nginx/nginx.conf
 
+# Add database connection args
+echo "database connection args"
+DB=${DB:-}
+DB_USER=${DB_USER:-}
+DB_PWD=${DB_PWD:-}
+DB_HOST=${DB_HOST:-}
+DB_PORT=${DB_PORT:-5439}
+
 # Set the max number of connections per worker for Nginx, if requested
 # Cannot exceed worker_rlimit_nofile, see NGINX_WORKER_OPEN_FILES below
 if [[ -v NGINX_WORKER_CONNECTIONS ]] ; then
